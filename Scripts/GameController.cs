@@ -11,16 +11,15 @@ namespace GameController
         public Text CountText;
         public GameVictoryController GameVictory;
 
+        [Header("Traps")]
+        public GameObject PanelGameOver;
+
         [Header("Player Camera")]
         [SerializeField] private GameObject _camera;
     
         [Header("Player")]
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private Transform _spawnPoint;
-
-        [Header("Traps")]
-        private GameObject[] _traps;
-        private TrapController[] _trapController;
 
         [Header("Sphere Trigger")]
         [SerializeField] private float _radius;
@@ -42,12 +41,10 @@ namespace GameController
 
                 GameVictory = new GameVictoryController(_center, _radius, _panelWin);
 
-
                 _updatables.Add(GameVictory);
                 _updatables.Add(playerView);
                 _fixedUpdatables.Add(playerView);
                 _updatables.Add(new CameraController(_playerPosition, _camera.transform));
-
             }
             catch (UnassignedReferenceException missingObject)
             {
