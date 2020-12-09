@@ -28,4 +28,13 @@ public class PlayerController : IUpdatable, IFixedUpdatable
         _movement.y = _rigidbody.velocity.y;
         _rigidbody.velocity = _movement;
     }
+
+
+    private void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+
+        }
+    }
 }

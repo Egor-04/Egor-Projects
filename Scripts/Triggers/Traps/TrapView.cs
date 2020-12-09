@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+
 
 namespace GameController
 {
-    public class TrapView : IUpdatable
+    public class TrapView : MonoBehaviour
     {
-        [Header("Panel")]
-        public GameObject _panelGameOver;
-        public GameObject _trapObject;
+        private GameController _gameController;
 
-        private TrapController _trapController;
-
-        public void UpdateTick()
+        private void Start()
         {
-            _trapController.UpdateTick();
+            _gameController = GameObject.FindObjectOfType<GameController>().GetComponent<GameController>();    
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                Time.timeScale = 0;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+    
+                _gameController._panelGameOver.SetActive(true);
+            }
         }
     }
 }

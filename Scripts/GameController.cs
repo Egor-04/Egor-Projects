@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
 
 namespace GameController
 {
-    public sealed class GameController : MonoBehaviour
+    public class GameController : MonoBehaviour
     {
         [Header("Required Bonus")]
         public Text CountText;
         public GameVictoryController GameVictory;
 
         [Header("Traps")]
-        public GameObject PanelGameOver;
+        public GameObject _panelGameOver;
 
         [Header("Player Camera")]
         [SerializeField] private GameObject _camera;
@@ -25,7 +24,10 @@ namespace GameController
         [SerializeField] private float _radius;
         [SerializeField] private Transform _center;
         [SerializeField] private GameObject _panelWin;
-        
+
+        [Header("UI")]
+        public UIController _UIcontroller;
+
         private Transform _playerPosition;
         private List<IUpdatable> _updatables = new List<IUpdatable>();
         private List<IFixedUpdatable> _fixedUpdatables = new List<IFixedUpdatable>();
@@ -38,7 +40,7 @@ namespace GameController
                 var player = Instantiate(_playerPrefab, _spawnPoint.position, Quaternion.identity);
                 var playerView = player.GetComponent<PlayerView>();
                 _playerPosition = player.transform;
-
+                
                 GameVictory = new GameVictoryController(_center, _radius, _panelWin);
 
                 _updatables.Add(GameVictory);
